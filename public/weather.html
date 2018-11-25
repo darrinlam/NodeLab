@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>City Finder</title>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+</head>
+<body>
+<form>
+Enter A Utah City: <input type="text" id="cityfield" value=""><br>
+Suggestion: <span id="txtHint">Empty</span>
+</form>
+<script>
+$( "#cityfield" ).keyup(function() {
+  var url = "getcity?q="+$("#cityfield").val();
+  $.getJSON(url,function(data) {
+    var everything;
+    everything = "<ul>";
+    $.each(data, function(i,item) {
+      everything += "<li> "+data[i].city;
+    });
+    everything += "</ul>";
+    $("#txtHint").html(everything);
+  });
+});
+
+</script>
+
+  <div id=control ng-app='app' ng-controller='main'>
+   <h1>Enter Word You Wish to Search For:</h1>
+   <form name='wordForm' ng-submit='add(wordForm)'>
+     <input placeholder='Type Word Here' ng-model='wordForm.word' />
+     <button type=submit>Search</button>
+   </form>
+   
+   <!-- not entirely sure how to use the user's input in order to retrieve the json result of the wordfrom the owlbot dictionary api. 
+   Also, some parts of the controller might be unnecessary. This is basically a layout of the controller based on a previous lab-->
+   
+   Type: </br>
+   Definition: </br>
+   Example: </br>
+   
+  </div>
+  
+</body>
+</html>
